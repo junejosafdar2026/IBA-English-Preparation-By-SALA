@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Challenge - SALA</title>
+<link rel="stylesheet" href="style.css">
+<style>
+    /* Special "Daily" Styles */
+    .daily-header { text-align: center; margin-bottom: 20px; }
+    .date-badge {
+        background: linear-gradient(45deg, #ef4444, #f97316);
+        color: white; padding: 5px 20px; border-radius: 50px;
+        font-weight: bold; font-size: 0.9rem; display: inline-block;
+        box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4); margin-bottom: 10px;
+    }
+
+    /* The Reading Passage Paper Look */
+    .passage-box {
+        background: #f1f5f9; /* Light paper color */
+        color: #0f172a; /* Dark text for reading */
+        padding: 25px; border-radius: 8px;
+        font-family: 'Georgia', serif; /* Book font */
+        line-height: 1.8; font-size: 1.05rem;
+        border-left: 5px solid #ef4444;
+        margin-bottom: 30px; text-align: justify;
+    }
+    .passage-title { text-align: center; font-weight: bold; font-size: 1.3rem; margin-bottom: 15px; text-transform: uppercase; color: #1e293b; }
+
+    /* Questions */
+    .mcq-card { background: #1e293b; margin-bottom: 15px; padding: 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); }
+    .q-text { color: #fff; font-weight: 600; margin-bottom: 10px; font-size: 1.05rem; }
+    
+    .opt-btn {
+        display: block; width: 100%; text-align: left; padding: 12px; margin: 8px 0;
+        background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+        color: #cbd5e1; border-radius: 6px; cursor: pointer; transition: 0.2s;
+    }
+    .opt-btn:hover { background: rgba(255,255,255,0.15); }
+    
+    .result-msg { display: none; margin-top: 10px; padding: 10px; border-radius: 5px; font-weight: bold; }
+    .correct { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; }
+    .wrong { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
+</style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="daily-header">
+            <div class="date-badge">📅 Today's Challenge</div>
+            <h1>Reading Comprehension</h1>
+        </div>
+
+        <div class="passage-box">
+            <div class="passage-title">The Impact of AI on the Modern Workforce</div>
+            <p>
+                Artificial Intelligence (AI) has transformed the nature of work in the twenty-first century. While it offers unprecedented efficiency and productivity, it also raises significant concerns about job displacement. Industries such as manufacturing, logistics, and finance have seen substantial automation, reducing the need for repetitive human tasks. Conversely, new opportunities have emerged in AI development, data analysis, and machine learning, which demand highly skilled labor.
+            </p>
+            <p>
+                Economists argue that AI will create more jobs than it eliminates, but only if workers acquire the necessary technical skills. Without proactive measures in education and training, the workforce could face increased inequality. Moreover, ethical considerations, such as algorithmic bias and decision-making transparency, are crucial. Policymakers and business leaders must ensure that AI systems are designed responsibly, balancing innovation with social accountability.
+            </p>
+            <p>
+                In conclusion, AI presents both challenges and opportunities. Societies that invest in human capital, regulate AI usage responsibly, and adapt to technological shifts are more likely to thrive in the AI-driven economy. Conversely, those that ignore these imperatives may experience social disruption and economic inequality.
+            </p>
+        </div>
+
+        <div id="quiz-area"></div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button onclick="window.location.href='index.html'" class="whatsapp-btn" style="background: #334155; border:none; cursor:pointer;">← Back to Home</button>
+        </div>
+
+    </div>
+
+    <script>
+        const questions = [
+            { q: "1. What is the main idea of the passage?", options: ["A) AI is replacing humans in all types of jobs.", "B) AI is a double-edged sword, creating both opportunities and challenges.", "C) AI will eliminate all low-skilled jobs without exceptions.", "D) AI is only beneficial for manufacturing industries."], ans: 1 },
+            { q: "2. According to the passage, which industries have been significantly impacted by automation?", options: ["A) Education and healthcare", "B) Manufacturing, logistics, and finance", "C) Agriculture and tourism", "D) Real estate and retail"], ans: 1 },
+            { q: "3. The word 'displacement' in the passage most nearly means:", options: ["A) Promotion", "B) Replacement", "C) Support", "D) Creation"], ans: 1 },
+            { q: "4. Which of the following is a new opportunity created by AI?", options: ["A) Repetitive manufacturing tasks", "B) Data analysis and machine learning", "C) Traditional bookkeeping", "D) Routine delivery jobs"], ans: 1 },
+            { q: "5. What is necessary for the workforce to benefit from AI, according to economists?", options: ["A) Increased production quotas", "B) Acquisition of technical skills", "C) Reduction in working hours", "D) Focus on unskilled labor"], ans: 1 },
+            { q: "6. The passage suggests that without proper education and training:", options: ["A) AI will have no effect on society.", "B) Inequality in the workforce may increase.", "C) All jobs will be replaced by AI immediately.", "D) AI will be used only in developing countries."], ans: 1 },
+            { q: "7. What ethical concern regarding AI is mentioned in the passage?", options: ["A) Environmental degradation", "B) Algorithmic bias and transparency", "C) Energy consumption", "D) Cost of AI implementation"], ans: 1 },
+            { q: "8. The phrase 'AI-driven economy' most likely refers to:", options: ["A) An economy dependent on manual labor", "B) An economy significantly influenced by AI technology", "C) An economy with no technological innovation", "D) An economy focused only on agriculture"], ans: 1 },
+            { q: "9. According to the passage, which societies are more likely to succeed in the AI era?", options: ["A) Societies that resist technological change", "B) Societies that invest in human capital and regulate AI responsibly", "C) Societies that ignore AI advancements", "D) Societies that focus only on AI without human development"], ans: 1 },
+            { q: "10. Which of the following best summarizes the author’s perspective?", options: ["A) AI is dangerous and should be avoided.", "B) AI has only positive effects if used wisely, with attention to human skills.", "C) AI will automatically improve society without intervention.", "D) AI should replace all human workers to maximize efficiency."], ans: 1 }
+        ];
+
+        const quizArea = document.getElementById('quiz-area');
+
+        questions.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'mcq-card';
+            
+            let optionsHTML = '';
+            item.options.forEach((opt, i) => {
+                optionsHTML += `<button class="opt-btn" onclick="checkAnswer(this, ${i}, ${item.ans})">${opt}</button>`;
+            });
+
+            card.innerHTML = `
+                <div class="q-text">${item.q}</div>
+                ${optionsHTML}
+                <div class="result-msg"></div>
+            `;
+            quizArea.appendChild(card);
+        });
+
+        function checkAnswer(btn, selectedIndex, correctIndex) {
+            const parent = btn.parentElement;
+            const msgBox = parent.querySelector('.result-msg');
+            const allBtns = parent.querySelectorAll('.opt-btn');
+
+            allBtns.forEach(b => b.disabled = true); // Lock buttons
+
+            if (selectedIndex === correctIndex) {
+                btn.style.background = '#10b981'; 
+                btn.style.color = 'white';
+                msgBox.innerHTML = "✅ Correct!";
+                msgBox.className = "result-msg correct";
+                msgBox.style.display = "block";
+            } else {
+                btn.style.background = '#ef4444'; 
+                btn.style.color = 'white';
+                allBtns[correctIndex].style.background = '#10b981'; // Show correct answer
+                allBtns[correctIndex].style.color = 'white';
+                msgBox.innerHTML = "❌ Incorrect. The correct answer is highlighted.";
+                msgBox.className = "result-msg wrong";
+                msgBox.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
+
